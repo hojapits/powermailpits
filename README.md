@@ -1,4 +1,5 @@
 powermailpits
 =============
 
-Powermail Pits
+This extension is for extending custom functionality of BIBUS Powermail.
+
