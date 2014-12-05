@@ -1,0 +1,11 @@
+{namespace vh=Tx_Powermail_ViewHelpers}
+
+	<div id="powermaildiv_uid{field.uid}" class="tx_powermail_pi1_fieldwrap_html tx_powermail_pi1_fieldwrap_html_captcha tx_powermail_pi1_fieldwrap_html_{field.uid}">
+		<label for="tx_powermail_pi1_fieldwrap_html_captcha_description powermail_field_{field.marker}"><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if><vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss></label>
+		<div class="tx_powermail_pi1_fieldwrap_html_captcha_description powermail_captcha_outer {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}">
+		<f:form.textfield id="powermail_field_{field.marker}" name="field[{field.uid}]" value="" class="powermail_field powermail_captcha validate[required]}" required="required" />
+		<img src="{vh:Misc.Captcha()}" alt="captcha" class="powermail_captchaimage" id="powermail_captchaimage" />
+		
+		<div class="tx_powermail_pi1_fieldwrap_html_captcha_description {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}">{field.title}</div>
+	</div>
+	</div>

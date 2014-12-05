@@ -1,0 +1,11 @@
+{namespace vh=Tx_Powermail_ViewHelpers}
+	<div id="powermaildiv_uid{field.uid}" class="tx_powermail_pi1_fieldwrap_html tx_powermail_pi1_fieldwrap_html_textarea tx_powermail_pi1_fieldwrap_html_{field.uid}">
+		<label for="powermail_field_{field.marker}" class="{vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if><vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss></label>
+		<f:form.textarea
+			cols="20"
+			rows="5"
+			id="powermail_field_{field.marker}"
+			name="field[{field.uid}]"
+			value="{vh:Misc.PrefillField(field: '{field}')}"
+			class="powermail_field powermail_textarea {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}" />
+	</div>

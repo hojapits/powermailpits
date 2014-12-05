@@ -1,0 +1,45 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:layout name="Default" />
+
+Render Powermail Form
+{forms} 			All Forms with their Pages and their Fields
+
+
+<f:section name="main">
+
+	<f:flashMessages class="powermail_message powermail_message_error" />
+	
+<div class="tx-powermail-pi1_formwrap tx-powermail-pi1_formwrap_{form.uid}">
+	<f:if condition="{forms}">
+		<f:then>
+			<f:for each="{forms}" as="form">
+				<f:form
+						action="{action}"
+						name="field"
+						enctype="multipart/form-data"
+						additionalAttributes="{vh:Validation.EnableParsleyAndAjax(form:form)}"
+						class="powermail_form powermail_form_{form.uid} {form.css} {vh:Misc.MorestepClass(activate:settings.main.moresteps, class:'powermail_morestep')}">
+
+					<!--<h3>{form.title}</h3>-->
+					<!-- <f:render partial="Misc/FormError" arguments="{_all}" />  -->
+
+					<f:for each="{form.pages}" as="page" iteration="itemIteration">
+						<fieldset class="powermail_fieldset powermail_fieldset_{page.uid} {page.css} {f:if(condition: itemIteration.isFirst, then: 'show_error')}">
+							<legend class="powermail_legend {f:if(condition: itemIteration.isLast, then: 'show_legend')}">{page.title}</legend>
+							<f:for each="{page.fields}" as="field">
+								<f:render partial="Form/{vh:String.Upper(string:field.type)}" arguments="{field:field,errorClass:error_class,fileStatus:file_upload}" />
+							</f:for>
+						</fieldset>
+					</f:for>
+
+					<f:form.hidden name="mail[form]" value="{form.uid}" class="powermail_form_uid" />
+					<f:render partial="Misc/HoneyPod" arguments="{form:form}" />
+				</f:form>
+			</f:for>
+		</f:then>
+		<f:else>
+			<f:translate key="error_no_form" />
+		</f:else>
+	</f:if>
+</div>
+</f:section>
